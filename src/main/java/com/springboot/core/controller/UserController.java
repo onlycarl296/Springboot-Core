@@ -1,9 +1,11 @@
 package com.springboot.core.controller;
 
+import com.springboot.core.dto.request.ApiResponse;
 import com.springboot.core.dto.request.UserCreationRequest;
 import com.springboot.core.dto.request.UserUpdateRequest;
 import com.springboot.core.entity.User;
 import com.springboot.core.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +18,12 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    User createUser(@RequestBody UserCreationRequest request){
-        return userService.createUser(request);
+    ApiResponse<User> createUser(@RequestBody @Valid UserCreationRequest request){
+        ApiResponse<User> apiResponse = new ApiResponse<>();
+
+        apiResponse.setResult(userService.createUser(request));
+
+        return apiResponse;
     }
 
     @GetMapping
