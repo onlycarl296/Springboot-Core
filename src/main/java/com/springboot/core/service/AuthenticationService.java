@@ -90,7 +90,7 @@ public class AuthenticationService {
                 .expirationTime(new Date(
                         Instant.now().plus(1, ChronoUnit.HOURS).toEpochMilli()
                 ))
-//                .claim("scope", buildScope(user))
+                .claim("scope", buildScope(user))
                 .build();
 
         Payload payload = new Payload(jwtClaimsSet.toJSONObject());
@@ -106,11 +106,11 @@ public class AuthenticationService {
         }
     }
 
-//    private String buildScope(User user){
-//        StringJoiner stringJoiner = new StringJoiner(" ");
-//        if (!CollectionUtils.isEmpty(user.getRoles()))
-//            user.getRoles().forEach(stringJoiner::add);
-//
-//        return stringJoiner.toString();
-//    }
+    private String buildScope(User user){
+        StringJoiner stringJoiner = new StringJoiner(" ");
+        if (!CollectionUtils.isEmpty(user.getRoles()))
+            user.getRoles().forEach(stringJoiner::add);
+
+        return stringJoiner.toString();
+    }
 }
