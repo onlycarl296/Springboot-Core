@@ -35,6 +35,7 @@ public class SecurityConfig {
         httpSecurity.authorizeHttpRequests(request ->
                 request.requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS).permitAll()
                         .requestMatchers(HttpMethod.GET, "/users")
+//                        .hasAnyAuthority("ROLE_ADMIN") // tương tự như dưới nhưng bên dưới sẽ tìm role ko xét prefix
                         .hasRole(Role.ADMIN.name())
 
                         .anyRequest().authenticated());
