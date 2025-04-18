@@ -191,6 +191,7 @@ public class AuthenticationService {
         var verified = signedJWT.verify(verifier);
 
         if (!(verified && expiryTime.after(new Date()))) throw new AppException(ErrorCode.UNAUTHENTICATED);
+        // Nếu không verify được và thời gian hết hạn để refresh (expiryTime) trước ngày hôm nay thì sẽ ném ra ngoại lệ
 
         if (invalidatedTokenRepository.existsById(signedJWT.getJWTClaimsSet().getJWTID()))
             throw new AppException(ErrorCode.UNAUTHENTICATED);

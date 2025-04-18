@@ -8,6 +8,7 @@ spring:
     name: core
   datasource:
     url: "jdbc:mysql://localhost:3306/identity_service"
+    driverClassName: "com.mysql.cj.jdbc.Driver"
     username: user
     password: password
   jpa:
