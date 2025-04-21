@@ -1,8 +1,10 @@
 package com.springboot.core.configuration;
 
 import com.springboot.core.constant.PredefinedRole;
+import com.springboot.core.entity.Permission;
 import com.springboot.core.entity.User;
 import com.springboot.core.entity.Role;
+import com.springboot.core.repository.PermissionRepository;
 import com.springboot.core.repository.RoleRepository;
 import com.springboot.core.repository.UserRepository;
 import lombok.AccessLevel;
@@ -38,10 +40,19 @@ public class ApplicationInitConfig {
             value = "datasource.driverClassName",
             havingValue = "com.mysql.cj.jdbc.Driver"
     )
-    ApplicationRunner applicationRunner(UserRepository userRepository, RoleRepository roleRepository) {
+    ApplicationRunner applicationRunner(UserRepository userRepository, RoleRepository roleRepository, PermissionRepository permissionRepository) {
         log.info("Initializing application.....");
         return args -> {
             if (userRepository.findByUsername(ADMIN_USER_NAME).isEmpty()) {
+
+                var permissions = new HashSet<Permission>();
+
+                Permission permission = permissionRepository.save(Permission.builder()
+                        .name("APPROVE_POST")
+                        .description("approve a post")
+                        .build());
+                permissions.add(permission);
+
                 roleRepository.save(Role.builder()
                         .name(PredefinedRole.USER_ROLE)
                         .description("User role")
@@ -50,6 +61,7 @@ public class ApplicationInitConfig {
                 Role adminRole = roleRepository.save(Role.builder()
                         .name(PredefinedRole.ADMIN_ROLE)
                         .description("Admin role")
+                        .permissions(permissions)
                         .build());
 
                 var roles = new HashSet<Role>();

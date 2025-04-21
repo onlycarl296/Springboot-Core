@@ -72,7 +72,6 @@ public class GlobalExceptionHandler {
             log.info(attributes.toString());
 
         } catch (IllegalArgumentException e){
-
         }
 
         ApiResponse apiResponse = new ApiResponse();
