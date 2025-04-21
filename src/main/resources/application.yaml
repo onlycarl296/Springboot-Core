@@ -4,13 +4,11 @@ server:
     context-path: /identity
 
 spring:
-  application:
-    name: core
   datasource:
-    url: "jdbc:mysql://localhost:3306/identity_service"
+    url: ${DBMS_CONNECTION:jdbc:mysql://localhost:3306/identity_service}
     driverClassName: "com.mysql.cj.jdbc.Driver"
-    username: user
-    password: password
+    username: ${DBMS_USERNAME:user}
+    password: ${DBMS_PASSWORD:password}
   jpa:
     hibernate:
       ddl-auto: update
