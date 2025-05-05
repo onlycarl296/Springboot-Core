@@ -64,6 +64,8 @@ public class ApplicationInitConfig {
                         .permissions(permissions)
                         .build());
 
+                roleRepository.save(adminRole);
+
                 var roles = new HashSet<Role>();
                 roles.add(adminRole);
 
