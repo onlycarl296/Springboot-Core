@@ -15,7 +15,7 @@ public class WebConfiguration implements WebMvcConfigurer {
     private Logger _log = LogManager.getLogger(WebConfiguration.class);
 
     public WebConfiguration() {
-        _log.error("TamNTTc: WebConfiguration");
+        _log.error("Configuration: WebConfiguration");
     }
 
     @Override

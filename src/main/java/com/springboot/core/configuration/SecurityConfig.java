@@ -28,7 +28,7 @@ import javax.crypto.spec.SecretKeySpec;
 public class SecurityConfig {
 
     private final String[] PUBLIC_ENDPOINTS = {"/users",
-            "/auth/token", "/auth/introspect", "/auth/logout", "/auth/refresh"
+            "/auth/token", "/auth/introspect", "/auth/logout", "/auth/refresh","/check"
     };
     private CustomJwtDecoder customJwtDecoder;
 
@@ -37,7 +37,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(request ->
                 request.requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS).permitAll()
-//                        .requestMatchers(HttpMethod.GET, "/users")
+                        .requestMatchers(HttpMethod.GET, "/check").permitAll()
 ////                        .hasAnyAuthority("ROLE_ADMIN") // tương tự như dưới nhưng bên dưới sẽ tìm role ko xét prefix
 //                        .hasRole(Role.ADMIN.name())
 
