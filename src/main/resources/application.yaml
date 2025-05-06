@@ -13,6 +13,8 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  profiles:
+    active: @spring.profiles.active@
 
 jwt:
   signerKey: "1TjXchw5FloESb63Kc+DFhTARvpWL4jUGCwfGWxuG5SIf/1y/LgJxHnMqaF6A/ij"
